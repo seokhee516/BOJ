@@ -21,11 +21,7 @@ for _ in range(N):
         try:
             if len(stack) != 0:
                 print(stack.pop())
-            print(-1)
+            else:
+                print(-1)
         except:
             print(-1)
-# A = []
-# try:
-#     A.pop()
-# except:
-#     print(-1)
