@@ -10,3 +10,13 @@ def insert_after(self, previous_node, data):
         
 self.tail.next = new_node
 self.tail = new_node
+
+data = previos_node.next.data
+
+if previous_node.next is self.tail:
+    previous_node.next = None
+    self.tail = previous_node
+else:
+    previous_node.next = previous_node.next.next
+
+retrun data

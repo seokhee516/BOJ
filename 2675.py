@@ -6,5 +6,3 @@ for _ in range(T):
     for i in range(len(K)):
         print(K[i]*int(N), end='')
     print()
-
-# print(list('ABC'))
