@@ -1,22 +1,10 @@
-def insert_after(self, previous_node, data):
-    new_node = Node(data)
-    # 가장 마지막 순서 삽입
-    if previous_node is self.tail:
-        self.tail.next = new_node
-        self.tail = new_node
-    else: # 두 노드 사이에 삽입
-        new_node.next = previous_node.next
-        previous_node.next = new_node
-        
-self.tail.next = new_node
-self.tail = new_node
+def flip(some_list):
+    # 코드를 입력하세요.
+    if len(some_list) == 0 or len(some_list) == 1:
+        return some_list
+    return some_list[-1:]+flip(some_list[:-1])
 
-data = previos_node.next.data
-
-if previous_node.next is self.tail:
-    previous_node.next = None
-    self.tail = previous_node
-else:
-    previous_node.next = previous_node.next.next
-
-retrun data
+# 테스트
+some_list = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+some_list = flip(some_list)
+print(some_list)
