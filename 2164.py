@@ -9,7 +9,4 @@ while len(queue) != 1:
     queue.popleft()
     queue.append(queue.popleft())
 
-# queue.popleft()
-# queue.append(queue.popleft())
-# queue.popleft()
 print(queue[0])
