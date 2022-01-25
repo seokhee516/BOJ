@@ -17,10 +17,16 @@
 
 # # 시간초과
 
-x = list(range(3,16+1))
+import sys
+n, m = map(int, sys.stdin.readline().split())
+def isPrime(a):
+    if (a<2):
+        return False
+    for i in range(2, int(a**0.5)+1): ### 제곱근까지만 확인!
+        if a % i == 0:
+            return False
+    return True
 
-for i in range(len(x)):
-    for j in range(2, len(x)):
-        if x[j] % x[i] == 0:
-            x.remove(x[j])
-            
+for i in range(n, m+1):
+    if isPrime(i):
+        print(i)
