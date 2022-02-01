@@ -1,55 +1,30 @@
+from collections import deque
+from subway_graph import create_station_graph
 
-import sys
+def bfs(graph, start_node):
+    """시작 노드에서 bfs를 실행하는 함수"""
+    queue = deque()  # 빈 큐 생성
 
-def heapify(tree, index, tree_size):
-    left_child_index = 2 * index
-    right_child_index = 2 * index + 1
-    
-    largest = index
+    # 일단 모든 노드를 방문하지 않은 노드로 표시
+    for station_node in graph.values():
+        station_node.visited = False
 
-    if 0 <left_child_index< tree_size and tree[left_child_index] > tree[index]:
-        largest = left_child_index
-    if 0 < right_child_index< tree_size and tree[right_child_index]>tree[index]:
-        largest = right_child_index
-    
-    if largest != index:
-        swap(tree, index, largest)
-        heapify(tree, largest, tree_size)
 
-def swap(tree, index1, index2):
-    tree[index1], tree[index2] = tree[index2], tree[index1]
+stations = create_station_graph("./new_stations.txt")  # stations.txt 파일로 그래프를 만든다
 
-def reverse_heapify(tree, index):
-    parent_index = index // 2
-    if 0 < parent_index < len(tree) and tree[parent_index]<tree[index]:
-        swap(tree, parent_index, index)
-        reverse_heapify(tree, parent_index)
+gangnam_station = stations["강남"]
 
-'''
-heap = [None]
-for _ in range(int(sys.stdin.readline().strip())):
-    x = int(sys.stdin.readline().strip())
-    if x == 0:
-        try:
-            swap(heap, 1, len(heap)-1)
-            return_value = heap.pop()
-            heapify(heap, 1, len(heap))
-            print(return_value)
-        except IndexError:
-            print(0)
-    else:
-        heap.append(x)
-        reverse_heapify(heap, len(heap)-1)
-'''
+# 강남역과 경로를 통해 연결된 모든 노드를 탐색
+bfs(stations, gangnam_station)
 
-heap = [None]
-for _ in range(int(sys.stdin.readline().strip())):
-    x = int(sys.stdin.readline().strip())
-    if x == 0:
-        if len(heap) == 1:
-            print(0)
-        else:
-            print(heap.pop(1))
-    else:
-        heap.append(x)
-        reverse_heapify(heap, len(heap)-1)
+# 강남역과 서울 지하철 역들이 연결됐는지 확인
+print(stations["강동구청"].visited)
+print(stations["평촌"].visited)
+print(stations["송도"].visited)
+print(stations["개화산"].visited)
+
+# 강남역과 대전 지하철 역들이 연결됐는지 확인
+print(stations["반석"].visited)
+print(stations["지족"].visited)
+print(stations["노은"].visited)
+print(stations["(대전)신흥"].visited)
