@@ -1,7 +1,11 @@
-import sys
-from collections import deque
-N = 4
-i = 0
-A = list(map(int, sys.stdin.readline().strip().split()))
-B = deque([(A[i], i) for i in range(len(A))])
-print(B)
+'''
+DFS 알고리즘
+시작 노드를 옅은 회색 표시 후, 스택에 넣음
+스택에 아무 노드가 없을 때까지:
+    스택  가장 위 노드를 꺼낸다
+    노드를 방문 (진한회색)표시한다
+    인접한 노드들을 모두 보면서:
+    처음 방문하거나 스택에 없는 노드면:
+        옅은 회색 표시를 해준다
+        스택에 넣는다.
+'''
