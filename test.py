@@ -30,7 +30,16 @@ graph = [
 
 # visited = [False] * 9
 # dfs(graph, 1, visited)
-
+'''
+BFS 알고리즘
+시작 노드를 방문 표시 후, 큐에 넣음 
+큐에 아무 노드가 없을때까지:
+    큐 가장 앞 노드를 꺼낸다
+    꺼낸 노드에 인접한 노드들을 모두 보면서:
+        처음 방문한 노드면: 
+            방문한 노드 표시를 해준다
+            큐에 넣어준다
+'''
 from collections import deque
 def bfs(graph, start, visited):
     queue = deque([start])
