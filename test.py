@@ -1,56 +1,60 @@
 '''
-DFS 알고리즘
-시작 노드를 옅은 회색 표시 후, 스택에 넣음
-스택에 아무 노드가 없을 때까지:
-    스택  가장 위 노드를 꺼낸다
-    노드를 방문 (진한회색)표시한다
-    인접한 노드들을 모두 보면서:
-    처음 방문하거나 스택에 없는 노드면:
-        옅은 회색 표시를 해준다
-        스택에 넣는다.
-'''
+class StationNode:
+    """간단한 지하철 역 노드 클래스"""
+    def __init__(self, station_name):
+        self.station_name = station_name
+        self.adjacent_stations = []  # 인접 리스트
 
-def dfs(graph, v, visited):
-    visited[v] = True
-    print(v, end=' ')
-    for i in graph[v]:
-        if not visited[i]:
-            dfs(graph, i, visited)
-graph = [
-    [],
-    [2,3,8],
-    [1,7],
-    [1,4,5],
-    [3,5],
-    [3,4],
-    [7],
-    [2,6,8],
-    [1,7]
-]
 
-# visited = [False] * 9
-# dfs(graph, 1, visited)
-'''
-BFS 알고리즘
-시작 노드를 방문 표시 후, 큐에 넣음 
-큐에 아무 노드가 없을때까지:
-    큐 가장 앞 노드를 꺼낸다
-    꺼낸 노드에 인접한 노드들을 모두 보면서:
-        처음 방문한 노드면: 
-            방문한 노드 표시를 해준다
-            큐에 넣어준다
-'''
-from collections import deque
-def bfs(graph, start, visited):
-    queue = deque([start])
-    visited[start] = True
-    while queue:
-        v = queue.popleft()
-        print(v, end=' ')
-        for i in graph[v]:
-            if not visited[i]:
-                queue.append(i)
-                visited[i] = True
+    def add_connection(self, other_station):
+        """지하철 역 노드 사이 엣지 저장하기"""
+        self.adjacent_stations.append(other_station)
+        other_station.adjacent_stations.append(self)
 
-visited = [False] * 9
-bfs(graph, 1, visited)
+
+    def __str__(self):
+        """지하철 노드 문자열 메소드. 지하철 역 이름과 연결된 역들을 모두 출력해준다"""
+        res_str = f"{self.station_name}: "  # 리턴할 문자열
+
+        # 리턴할 문자열에 인접한 역 이름들 저장
+        for station in self.adjacent_stations:
+            res_str += f"{station.station_name} "
+
+        return res_str
+
+def create_subway_graph(input_file):
+    """input_file에서 데이터를 읽어 와서 지하철 그래프를 리턴하는 함수"""
+    stations = {}  # 지하철 역 노드들을 담을 딕셔너리
+
+    # 파라미터로 받은 input_file 파일을 연다
+    with open(input_file) as stations_raw_file:
+        for line in stations_raw_file:  # 파일을 한 줄씩 받아온다
+            previous_station = None
+            subway_line = line.strip().split("-")  # 앞 뒤 띄어쓰기를 없애고 "-"를 기준점으로 데이터를 나눈다
+
+            for name in subway_line:
+                station_name = name.strip()  # 앞 뒤 띄어쓰기 없애기
+
+                # 지하철 역 이름이 이미 저장한 key 인지 확인
+                if station_name not in stations:
+                    current_station = StationNode(station_name)  # 새로운 인스턴스를 생성하고
+                    stations[station_name] = current_station  # dictionary에 역 이름은 key로, 역 노드 인스턴스를 value로 저장한다
+                else:
+                    current_station = stations[station_name]
+                    
+                if previous_station is not None:
+                    current_station.add_connection(previous_station)
+                    
+                previous_station = current_station
+    return stations
+
+
+stations = create_subway_graph("./stations.txt")  # stations.txt 파일로 그래프를 만든다
+
+# stations에 저장한 역 인접 역들 출력 (채점을 위해 역 이름 순서대로 출력)
+for station in sorted(stations.keys()):
+        print(stations[station])
+'''
+import sys
+node = int(sys.stdin.readline().strip())
+adj = [[] for _ in range(node-1)]
