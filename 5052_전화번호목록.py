@@ -11,7 +11,7 @@ def new_func(n, phone_book):
 for _ in range(t):
     n = int(input())
     phone_book = [input().strip() for _ in range(n)] # 리스트 컴프리헨션 빠름, input str로 받음
-    phone_book.sort() # 아스키순
+    phone_book.sort() # 아스키순 nlogn
     answer = new_func(n, phone_book)
-    sys.stdout.write(answer) # 프린트 대신 빠르게 받기
+    sys.stdout.write(answer) # print 대신 빠르게 출력
    
