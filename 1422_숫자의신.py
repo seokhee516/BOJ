@@ -1,4 +1,3 @@
-from functools import cmp_to_key # cmp_to_key가 필요한 경우 import
 '''
 2 4
 7
@@ -17,6 +16,7 @@ from functools import cmp_to_key # cmp_to_key가 필요한 경우 import
 901
 9910910901 가운데
 '''
+from functools import cmp_to_key # cmp_to_key가 필요한 경우 import
 import sys
 input = sys.stdin.readline
 K, N = map(int, input().split())
