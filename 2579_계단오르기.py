@@ -1,8 +1,9 @@
+
 import sys
 input = sys.stdin.readline
 n = int(input())
-s = [0 for i in range(301)]
 dp = [0 for _ in range(301)]
+s = [0 for i in range(301)]
 for i in range(n):
     s[i] = int(input())
 # 첫번째 계단
