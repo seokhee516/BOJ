@@ -1,0 +1,22 @@
+# 학생의 수는 기껏해야 30!
+# 학생 수만큼 배열을 확보하고, 체육복의 수를 기록한다.
+# 번호 순서대로 "스캔" 하면서 빌려줄 학생 정함
+def solution(n, lost, reserve):
+    # 여벌 가져온 학색 reserve 길이 비례
+    # 체육복 잃어버린 학생 los의 길이 비례
+    # 체육복 빌려주기 처리 전체 학생 n 비례
+    # O(n)
+    u = [1] * (n+2) # 앞 뒤로 가상의 학생 지정 (뒤에서 for 문 편의를 위해)
+    for i in reserve:
+        u[i] += 1
+    for i in lost:
+        u[i] -= 1
+    for i in range(1,n+1):
+        # 앞에 학생 확인
+        if u[i - 1] == 0 and u[i] == 2:
+            u[i - 1:i + 1] = [1, 1] # 두 원소를 모두 1로 만듬
+        # 뒤에 학생 확인
+        elif u[i] == 2 and u[i + 1] == 0:
+            u[i:i + 2] = [1, 1]
+
+    return len([x for x in u[1:-1] if x > 0])
