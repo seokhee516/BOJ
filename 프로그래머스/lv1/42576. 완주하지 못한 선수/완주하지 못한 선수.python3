@@ -1,0 +1,16 @@
+# 해시 테이블 활용 
+# 해시 테이블 장점 O(1) 접근 가능
+# 이름(키) - 등장 횟수(밸류) 각 이름을 가진 사람들이 몇번 등장했는지 확인
+# 완주한 선수에서 등장한 이름 빼주기
+# 0이 아닌 값을 가진 사람 키값 빼주기
+def solution(participant, completion):
+    answer = ''
+    d = {}
+    for x in participant:
+        d[x] = d.get(x, 0) + 1
+    for x in completion:
+        d[x] -= 1
+    # 완주하지 못한 선수 이름
+    dnf = [k for k, v in d.items() if v > 0]
+    answer = dnf[0]
+    return answer
