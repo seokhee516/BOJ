@@ -1,0 +1,12 @@
+def solution(numbers):
+    # 문자열로 바꾸기
+    str_numbers = list(map(str,numbers))
+    # numbers는 1000이하이므로 4번 반복한 뒤 4자리 수에서 자르기
+    sorted_numbers = sorted(str_numbers, key = lambda x:(x*4)[:4], reverse = True)
+    # numbers가 [0,0]이라면 '00'으로 문자열 리턴됨 
+    # 따라서 따로 처리
+    if sorted_numbers[0] == '0':
+        return '0'
+    else:
+        # 다른 경우 문자열로 바꾸어 return
+        return ''.join(sorted_numbers)
