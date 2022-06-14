@@ -1,0 +1,20 @@
+def solution(id_list, report, k):
+    answer = [0] * len(id_list)
+    d = {}
+    stop_id = set([]) # 정지당한 리스트
+    report_id = {} # 신고당한 아이디 정리
+    set_report = set(report) # 중복 제거
+    for r in set_report:
+        x, y = r.split()
+        d[y] = d.get(y, 0) + 1 # 신고당한 횟수 추가
+        if d[y] >= k: # k 보다 클경우
+            stop_id.add(y) # 정지당한 리스트에 추가
+        if x in report_id:
+            report_id[x].append(y)
+        else:
+            report_id[x] = [y]
+    for key, val in report_id.items():
+        for v in val:
+            if v in stop_id:
+                answer[id_list.index(key)] += 1
+    return answer
