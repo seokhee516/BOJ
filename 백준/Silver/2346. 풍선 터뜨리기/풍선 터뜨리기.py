@@ -3,20 +3,6 @@ input = sys.stdin.readline
 from collections import deque
 length = int(input())
 arr = [i for i in range(1, length+1)]
-arr = deque(zip(arr, map(int, input().split()))) # 튜플 형태로 입력
-
-ans = []
-while arr:
-    num, paper_num = arr.popleft() # 풍선의 번호, 종이에 적힌 번호
-    ans.append(num) # 풍선에 적힌 번호 추가
-    length -= 1
-    if length == 0:
-        break
-    if paper_num > 0:import sys
-input = sys.stdin.readline
-from collections import deque
-length = int(input())
-arr = [i for i in range(1, length+1)]
 arr = deque(zip(arr, map(int, input().split()))) 
 
 ans = []
@@ -83,9 +69,3 @@ deque([(0, 3), (1, 2), (2, 1), (3, -3), (4, -1)])
 나는 리스트를 하나 만들어서 zip으로 추가하는 방식이었는데 
 enumerate를 사용하면 index를 튜플 형태로 바로 저장할 수 있당 대박쓰~
 '''
-        paper_num %= length
-        arr.rotate(-(paper_num-1))
-    else:
-        paper_num = -(abs(paper_num)%length)
-        arr.rotate(-paper_num)
-print(' '.join(map(str, ans)))
