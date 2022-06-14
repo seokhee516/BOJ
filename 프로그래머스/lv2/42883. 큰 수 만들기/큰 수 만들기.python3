@@ -1,0 +1,14 @@
+def solution(number, k):
+    collected = []
+    for i, num in enumerate(number):
+        while len(collected) > 0 and collected[-1] < num and k > 0:
+            collected.pop()
+            k -= 1
+        if k == 0:
+            collected += list(number[i:]) # 현재 가르키고 있는 인덱스 위치
+            break
+        collected.append(num)
+    # k개 뺄 개수를 채우지 못한 경우 고려, 자리수 맞추기
+    length = len(number) - k
+    answer = ''.join(collected)[:length]
+    return answer
