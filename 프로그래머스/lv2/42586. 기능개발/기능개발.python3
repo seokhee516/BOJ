@@ -1,0 +1,15 @@
+from collections import deque
+def solution(progresses, speeds):
+    answer = []
+    speeds = deque(speeds)
+    temp = 0
+    while progresses:
+        progresses = deque([x+y for x,y in zip(progresses, speeds)])
+        while progresses and progresses[0]>=100:
+            progresses.popleft()
+            speeds.popleft()
+            temp += 1
+        if temp != 0:
+            answer.append(temp)
+            temp = 0
+    return answer
