@@ -25,15 +25,6 @@ def check(x, y, board):
                     else:
                         temp += 1
                 result = max(temp, result)
-                swap(x,y, nx,ny)
-    if result == n:
-        return result
-    for i in range(4):
-        nx = x + dx[i]
-        ny = y + dy[i]
-        if nx >= 0 and ny >= 0 and nx < n and ny < n:  
-            if board[x][y] != board[nx][ny]:
-                swap(x,y, nx,ny)
                 first_candy = board[0][y]
                 temp = 1
                 for j in range(1,n):
@@ -52,34 +43,32 @@ def run(n, board):
     # 행 확인
     for i in range(n):
         temp = 1
-        if board[i][0] != board[i][1]:
-            result = max(result, check(i, 0, board))
         for j in range(1,n):
             if board[i][j-1] != board[i][j]:
                 result = max(result, check(i, j, board))
                 temp = 1
-                if result == n:
-                    return result
             else:
                 temp += 1
         result = max(result, temp)
-        if result == n:
-            return result
     # 열 확인
     for i in range(n):
         temp = 1
-        if board[0][i] != board[1][i]:
-            result = max(result, check(i, 0, board))
         for j in range(1,n):
             if board[j-1][i] != board[j][i]:
                 result = max(result, check(i, j, board))
                 temp = 1
-                if result == n:
-                    return result
             else:
                 temp += 1
         result = max(result, temp)
     return result
+def n_same(board):
+    for i in range(n):
+        if board[i].count(board[i][0]) == n:
+            return True
+        for j in range(n-1):
+            if board[j][i] != board[j+1][i]:
+                return False
+    return True
 
 import sys
 input = sys.stdin.readline
@@ -87,4 +76,7 @@ n = int(input())
 board = []
 for _ in range(n):
     board.append(list(input().strip()))
-print(run(n,board))
+if n_same(board):
+    print(n)
+else:
+    print(run(n,board))
