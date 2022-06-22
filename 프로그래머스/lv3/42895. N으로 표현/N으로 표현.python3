@@ -1,0 +1,31 @@
+'''
+n 번 사용해서 만들 수 있는 수는?
+nnn...인 수와 1에서 n-1번을 사칙연산을 적용해 만들 수 있는 수를 만들어서 찾음
+괄호를 사용한것과 연산 적용한 것 동일
+
+N = 5
+s[0](1번 사용) - 5
+s[1](2번 사용) - 55, 10, 0, 25, 1
+s[2](3번 사용) - 555, s[0] +-x/ s[1], s[1] +-x/ s[0]
+
+중복이 있을 수 있으므로 집합으로 표현
+'''
+def solution(N, number):
+    s = [set() for x in range(8)] # 1~8번 사용해서 만들 수 있는 수의 집합
+    for i, x in enumerate(s, start=1):
+        x.add(int(str(N) * i))
+    for i in range(len(s)): # i = 0 부터 N과 number가 같은 경우
+        for j in range(i):
+            for op1 in s[j]:
+                for op2 in s[i - j - 1]:
+                    s[i].add(op1 + op2)
+                    s[i].add(op1 - op2)
+                    s[i].add(op1 * op2)
+                    if op2 != 0: # 0일 경우 나눗셈 불가하므로
+                        s[i].add(op1 // op2) # 나머지를 버림
+        if number in s[i]:
+            answer = i + 1
+            break
+    else:
+        answer = -1 # 8까지 가도 없을 경우
+    return answer
