@@ -1,0 +1,21 @@
+def solution(s):
+    def cutting(cut, s):
+        i = 0
+        ret = []
+        while i < len(s):
+            if (i+cut+cut <= len(s))  and (s[i:i+cut] == s[i+cut:i+cut+cut]):
+                cnt = 1
+                while (i+cut+cut <= len(s)) and (s[i:i+cut] == s[i+cut:i+cut+cut]):
+                    cnt += 1
+                    i += cut
+                ret.append(str(cnt))
+            else:
+                ret.append(s[i:i+cut])
+                i += cut
+        result = ''.join(ret)
+        return len(result)
+    answer = len(s)
+    # cut_limit = len(s) // 2
+    for i in range(1, len(s)):
+        answer = min(answer, cutting(i,s))
+    return answer
