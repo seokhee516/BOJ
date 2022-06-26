@@ -1,0 +1,33 @@
+import math
+def solution(fees, records):
+    answer = []
+    log = {}
+    parking = {}
+    for record in records:
+        time_log, car, state = record.split()
+        hour, minute = map(int, time_log.split(":"))
+        time = hour * 60 + minute
+        if state == 'IN':
+            log[car] = log.get(car, []) + [time]
+        elif state == 'OUT':
+            dif = time - log[car].pop(0)
+            parking[car] = parking.get(car, 0) + dif
+
+    midnight = 23 * 60 + 59
+    for k,v in log.items():
+        if v:
+            if v[0] == 0:
+                cal = 1439
+            else:
+                cal = midnight - v[0]
+            parking[k] = parking.get(k, 0) + cal
+
+    parking = sorted(parking.items())
+    
+    for car, time in parking:
+        if time <= fees[0]:
+            answer.append(fees[1])
+        else:
+            answer.append(fees[1] + math.ceil((time - fees[0])/fees[2]) *fees[3])
+    
+    return answer
