@@ -1,0 +1,11 @@
+def solution(lottos, win_nums):
+    zero_cnt = lottos.count(0) # 0의 개수
+    same_cnt = 0 # 일치 번호 개수
+    for l in lottos:
+        if l in win_nums:
+            same_cnt += 1
+    rank = {6:1, 5:2, 4:3, 3:4, 2:5, 1:6, 0:6} # (당첨내용:순위)
+    best = rank[same_cnt+zero_cnt] # 최고 순위 번호
+    worst = rank[same_cnt] # 최저 순위 번호
+    answer = [best, worst]
+    return answer
