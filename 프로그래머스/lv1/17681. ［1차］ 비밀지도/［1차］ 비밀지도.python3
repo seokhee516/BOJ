@@ -1,0 +1,15 @@
+def solution(n, arr1, arr2):
+    answer = []
+    for i in range(n):
+        binary1 = bin(arr1[i])
+        line1 = "0"*(n-len(binary1[2:])) + binary1[2:]
+        binary2 = bin(arr2[i])
+        line2 = "0"*(n-len(binary2[2:])) + binary2[2:]
+        s = []
+        for j in range(n):
+            if line1[j] == '1' or line2[j] =='1':
+                s.append('#')
+            else:
+                s.append(' ')
+        answer.append("".join(s))
+    return answer
