@@ -16,7 +16,7 @@ from collections import deque
 def canCompleteCircuit(self, gas: List[int], cost: List[int]) -> int:
         gas = deque(gas)
         cost = deque(cost)
-        tank = 0
+        ans, tank = -1, 0
 
         for idx in range(len(gas)):
             if gas[0] - cost[0] < 0: 
@@ -31,10 +31,11 @@ def canCompleteCircuit(self, gas: List[int], cost: List[int]) -> int:
                         break
                     tank += gas[i]
                 cost.append(cost.popleft())
-            if tank > 0:
-                return idx
+	          if tank > 0:
+			        ans = idx
+			        break
             tank = 0
-        return -1
+        return ans
 
 쌩구현. n의 최대값이  10^5이므로 이중 for 문 돌리면 10^10 시간초과
 cost 값보다 gas가 적으면 수행되지 않음 -> if surplus < 0 으로 확인 가능
