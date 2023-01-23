@@ -1,16 +1,14 @@
 def solution(cacheSize, cities):
-    cache = []
+    import collections
+    cache = collections.deque(maxlen=cacheSize)
     ans = 0
     for c in cities:
-        c = c.lower()
-        if c not in cache:
-            if len(cache) < cacheSize:
-                cache.append(c)
-            elif len(cache) >= cacheSize:
-                cache.append(c)
-                cache.pop(0)
-            ans += 5
-        else:
+        s = c.lower()
+        if s in cache:
+            cache.remove(s)
+            cache.append(s)
             ans += 1
-            cache.append(cache.pop(cache.index(c)))
+        else:
+            cache.append(s)
+            ans += 5
     return ans
