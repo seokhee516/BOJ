@@ -19,6 +19,8 @@ def nxt(state):
     tmp[5] = state[3] + state[4] + state[6]
     tmp[6] = state[5] + state[7]
     tmp[7] = state[4] + state[6]
+    for i in range(8):
+        tmp[i] %= 1000000007
     return tmp
 for i in range(int(input())):
     DP = nxt(DP)
