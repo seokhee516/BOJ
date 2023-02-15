@@ -1,6 +1,16 @@
 class Solution:
     def maxSubArray(self, nums: List[int]) -> int:
         # 그리디
+        res = cur_max = nums[0]
+
+        for n in nums[1:]:
+            cur_max = max(n, cur_max+n)
+            res = max(res, cur_max)
+        return res
+'''
+class Solution:
+    def maxSubArray(self, nums: List[int]) -> int:
+        # 그리디
         res = nums[0]
         cur = 0
         for n in nums:
@@ -9,6 +19,7 @@ class Solution:
             if cur < 0:
                 cur = 0
         return res
+'''
 '''
 class Solution:
     def maxSubArray(self, nums: List[int]) -> int:
