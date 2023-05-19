@@ -1,6 +1,6 @@
 # [level 2] 문자열 압축 - 60057 
 
-[문제 링크](https://programmers.co.kr/learn/courses/30/lessons/60057#) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/60057) 
 
 ### 성능 요약
 
@@ -12,7 +12,7 @@
 
 ### 채점결과
 
-<br/>정확성: 100.0<br/>합계: 100.0 / 100.0
+Empty
 
 ### 문제 설명
 
